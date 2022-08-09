@@ -17,7 +17,8 @@ bbmk was a quick and nasty frig because I had a lot of archive of files which
 I needed to put in an archive quickly!
 
 ## Syntax:
-   bbcls -i <image> [-alh]
+```
+bbcls -i <image> [-alh]
    
    -a - show all files (not implemented!)
    -l - do a unix like long listing of files
@@ -31,12 +32,13 @@ I needed to put in an archive quickly!
    -v - verbose
    -p - prompt (not implemented)
    -h - help
+```
 
    Note 1: When globbing, on Unix the shell will try to expand glob, put this
    in single quotes to get around it
    Note 2: Like Unix copy if you specify many files to one file the file will
    be overwritten by the last extracted file.
-
+```
    eg bbccp -i dave.ssd $.!BOOT
        - extracts $.!BOOT to $.!BOOT
       bbccp -i dave.ssd '$.!BOOT' out
@@ -45,7 +47,7 @@ I needed to put in an archive quickly!
        - extracts the whole of the $.* files to the bbcstuff directory
 
    bbcmk <outfile> <filelist>
-
+```
    Note 1: The filelist can have .inf already attached!
    
    eg bbcmk games.ssd *.inf
