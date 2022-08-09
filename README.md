@@ -1,6 +1,6 @@
 # BBCdisks
 
-##Programs to transfer files to and from BBC disks
+## Programs to transfer files to and from BBC disks
 
 Inside this archive are 3 quick utilities for manipulating BBC disc images,
 these are:
@@ -16,8 +16,7 @@ Amstrad CPC soon! - if you want these send me an email (address below)!)
 bbmk was a quick and nasty frig because I had a lot of archive of files which
 I needed to put in an archive quickly!
 
-Syntax's:
----------
+## Syntax:
    bbcls -i <image> [-alh]
    
    -a - show all files (not implemented!)
@@ -51,8 +50,7 @@ Syntax's:
    
    eg bbcmk games.ssd *.inf
 
-To Make
--------
+## To Make
 Type make all
 
 All programs released into the public domain under the GPL.
