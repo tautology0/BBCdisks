@@ -1,0 +1,71 @@
+BBC DFS Disc format
+===================
+
+This document is being written mainly because no other bugger has and I spent
+a long time working out the details!
+
+Even still it is not complete, so if anybody can comment on the last few
+details I'd be grateful...
+
+General Format
+--------------
+Like all other disc systems, Acorn DFS is divided up into tracks and sectors.
+
+No matter how many tracks are present (80 or 40 usually!) each track consists
+of 10 sectors, each sector being 256 bytes.
+
+Catalogue
+---------
+The DFS is catalogue is in two parts, each taking up a sector.
+
+First, at track 0, sector 0 we have the names sector, which consists of:
+ byte  usage
+ 0-7   first part of disc title
+ 8-e   first file name (padded out with NULs)
+   f   directory for first file 
+ ...
+ f8-fe 31st file name
+     f 31st directory
+
+From this one can see why there is the infamous 31 file limit on DFS discs -
+1 sector = 256 bytes at 8 bytes per filename = 32 files 
+- 1 for the title = 31 files.
+
+Then at track 0 sector 1 we have the file information table:
+  byte  usage
+  0-3   End of the disc title
+    4   Access count (a number which just cycles round!)
+    5   Top five bits are the number of files on the disc
+    6   Top nyble is the boot option (1,2 or 3)
+        Bottom nyble is the High value for sectors on disc
+    7   Low value for number of sectors on disc
+  8-9   Load address of first file
+  a-b   Execute address of first file
+  c-d   File size of first file
+    e   Strange byte of first file
+        this seems to be divided into pairs of bits:
+        bit    usage (?)
+        0-1    high bits of executable address
+        2-3    high bits of file size
+        4-5    high bits of load address
+        6-7    high bits of Start sector
+    f   start sector of first file
+  ...
+  
+From this we can see that the title can be up to 12 bytes, load and exec
+can range up to &2ffff, and the maximum file size is &2ffff bytes.
+
+Also DFS can only handle a maximum of &fff sectors on the disc.
+
+The start sector address is an absolute address of the sector, one can get
+the track and sector value from it by using:
+   track=start_sector / 10
+   sector=start_sector % 10
+
+Files
+=====
+The easy bit :-). Files are stored, sequentially from the start_sector, 'til
+they end... All rounded up to the nearest sector. So we could just load it
+in, for example C by doing:
+   fseek(inhandle,start_sector*256,SEEK_SET);
+   fread(filebuf,file_size,1,inhandle);
