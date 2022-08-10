@@ -57,8 +57,6 @@ Type make all
 
 All programs released into the public domain under the GPL.
 
-As for support, I coded these for my own use (and to get me back into C coding
-- too long doing Sys Admin work :-), but if you do use them and want extra
-stuff just send me an email (to dave@muspellheim.demon.co.uk)
+As for support, I coded these for my own use.
 
 (C) Copyright 30/12/1999 David Lodge
